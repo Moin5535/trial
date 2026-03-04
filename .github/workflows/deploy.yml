@@ -20,7 +20,7 @@ jobs:
         username: ${{ secrets.SSH_USER }}
         key: ${{ secrets.SSH_KEY }}
         source: "./*"
-        target: "/home/moin/site" 
+        target: "/home/ec2-user/site" 
 
     - name: SSH into server and build & restart container
       uses: appleboy/ssh-action@v1.0.0
@@ -29,7 +29,7 @@ jobs:
         username: ${{ secrets.SSH_USER }}
         key: ${{ secrets.SSH_KEY }}
         script: |
-          cd /home/moin/site
+          cd /home/ec2-user/site
           docker stop mysite || true
           docker rm mysite || true
           docker build -t mysite .
